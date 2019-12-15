@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Tyytyväisyys Haaga-Helian kurssien työelämäyhteyteen ja kurssitarjontaan">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="kysymykset.css">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script>
+        $(document).ready(function() {
+
+            $(".kuva").click(function() {
+                $("i").css({
+                    'color': 'white'
+                })
+                $(this).css({
+                    'color': 'darkorange'
+                })
+            });
+        })
+
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152551732-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-152551732-1');
+
+    </script>
+
+
+
+</head>
+
+<nav>
+    <a href="" class=""></a>
+
+</nav>
+
+<body>
+    <h1>Tyytyväisyys Haaga-Helian kurssien työelämäyhteyteen ja kurssitarjontaan</h1>
+
+
+
+
+
+    <div class="lomake">
+
+        <form>
+            <p>Tutkimme Haaga-Helian kurssitarjonnan työelämäyhteyttä sekä opiskelijoiden tyytyväisyyttä kurssivalikoimaan. <br>
+                Kyselyyn vastaaminen vie 2-3 minuuttia. Kiitos arvokkaista vastauksistasi! </p>
+
+
+
+            <a>1. Miten kurssien työelämäyhteys on tuotu esille?</a>
+            <br>
+            <label>
+                <input type="checkbox" name="tyoelama" value=""> Kurssilla on käyty yritysvierailulla
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="tyoelama" value=""> Yrityksen edustaja on käynyt luennoimassa kurssin aiheesta
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="tyoelama" value=""> Kurssin toimeksiantajana on ollut yritys
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="tyoelama" value=""> Opettaja on kertonut esimerkkejä yrityksistä, joissa opeteltavat metodit ovat käytössä
+            </label>
+        
+            <br><br>
+            <a> 2. Oletko suorittanut kursseja</a>
+            <br>
+            <label>
+                <input type="checkbox" name="kurssit" value=""> Campusonline.fi:n kautta
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="kurssit" value=""> 3AMK:n kautta
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="kurssit" value=""> Virtuaalisesti
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="kurssit" value=""> Helsingin seudun kesäyliopisto
+            </label>
+            <br>
+            <label>
+                <input type="checkbox" name="kurssit" value=""> Ei mitään yllämainituista
+            </label>
+            
+            <br><br>
+            <a>3. Mikä näistä kuvaa parhaiten Haaga-Helian kurssitarjontaa?</a>
+            <br><br>
+            <label>
+                <input type="radio" name="naama">
+                <i class='far fa-frown kuva'></i>
+            </label>
+            <label>
+                <input type="radio" name="naama">
+                <i class='far fa-meh kuva'></i>
+            </label>
+            <label>
+                <input type="radio" name="naama">
+                <i class='far fa-smile kuva'></i>
+            </label>
+            <label>
+                <input type="radio" name="naama">
+                <i class='far fa-grin kuva'></i>
+            </label>
+
+
+            <br><br>
+
+
+            <a>4. Mitä toivoisit Haaga-Helian kurssitarjonnalta?</a>
+            <br>
+            <textarea placeholder="Kerro kurssitoiveesi tähän..."></textarea>
+            <br><br>
+            <a>5. Kuinka todennäköisesti suosittelisit Haaga-Heliaa? (1 = en suosittele lainkaan, 10 = suosittelen lämpimästi)</a>
+            <br>
+            <label>
+                <input type="radio" name="suositus" value=""> 1
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 2
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 3
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 4
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 5
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 6
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 7
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 8
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 9
+            </label>
+            <label>
+                <input type="radio" name="suositus" value=""> 10
+            </label>
+            <br><br>
+
+            <button> Lähetä vastaukset </button>
+            <br><br><br><br>
+
+
+        </form>
+        <footer> &copy; Anna & Sonia
+        </footer>
+    </div>
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

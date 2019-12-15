@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="Tyytyväisyys Haaga-Helian kurssi tarjontaan">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="kysymykset.css">
+    <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans&display=swap" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+    <h1>Tyytyväisyys Haaga-Helian kurssien työelämäyhteyteen ja kurssitarjontaan</h1>
+
+
+
+    <div class="lomake">
+        <form class="tulostus">
+            <p>Tutkimme Haaga-Helian kurssitarjonnan työelämäyhteyttä sekä opiskelijoiden tyytyväisyyttä kurssivalikoimaan.
+                Kyselyyn vastaaminen vie 2-3 minuuttia.<br> Kiitos arvokkaista vastauksistasi! </p>
+        </form>
+        <div class="vastaus"></div>
+        <br>
+        <footer> &copy; Anna & Sonia
+        </footer>
+    </div>
+
+    <!-- jquerin pääkirjasto-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-152551732-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-152551732-1');
+
+    </script>
+    <!-- oma script -->
+    <script>
+        var lomake = []; // kerää id tunnukset tänne
+        var items = []; //taulukko, johon kerätään lomake       
+
+        $.getJSON("https://questionnaireapp.herokuapp.com/api/questions", function(data) {
+
+
+            // jos kaarisulut items.push(data.title);
+
+            $.each(data, function(key, d) {
+                items.push(d.questionText);
+                if (d.questiontype.questiontypeName == "text") {
+
+                    items.push("<input type = text id=" + d.questionId + "><br>");
+                    lomake.push(d.questionId);
+                } else if (d.questiontype.questiontypeName == "checkbox") {
+                    for (i = 0; i < d.options.length; i++) {
+                        items.push("<input type= checkbox id= " + d.questionId + " name=" + d.questionId + " value=" + d.options[i].optionText + ">" + d.options[i].optionText + "<br>");
+                    }
+                } else if (d.questiontype.questiontypeName == "radio") {
+                    for (i = 0; i < d.options.length; i++) {
+                        items.push("<input type= radio id= " + d.questionId + " name=" + d.questionId + " value=" + d.options[i].optionText + ">" + d.options[i].optionText + "<br>");
+                    }
+                } else if (d.questiontype.questiontypeName == "Skaala 1-10") {
+                    for (i = 0; i < d.options.length; i++) {
+                        items.push("<input type= radio id= " + d.questionId + " name=" + d.questionId + " value=" + d.options[i].optionText + ">" + d.options[i].optionText + "<br>");
+                    }
+                }
+
+
+
+            });
+
+            items.push("<br><input type = button value='Lähetä vastaukset' onclick=laheta()>")
+
+            //tulostus
+            $(".tulostus").append(items.join("<br>"));
+
+
+        });
+
+
+
+        function laheta() {
+            for (i = 0; i < lomake.length; i++) {
+                // alert(lomake[i] + ": " + document.getElementById(lomake[i]).value);
+                var vastaus = document.getElementById(lomake[i]).value;
+                var jsonData = [{
+                    "answerId": null,
+                    "answerText": vastaus,
+                    "question": {
+                        "questionId": lomake[i]
+                    }
+                }];
+
+                var myJSON = JSON.stringify(jsonData);
+                // alert(myJSON);
+                $.ajax({
+                    url: 'https://questionnaireapp.herokuapp.com/saveanswer',
+                    type: 'POST',
+                    dataType: 'application/json',
+                    contentType: 'application/json',
+                    data: myJSON,
+                    success: function() {
+                        // alert('POST completed. Data:' + myJSON)
+                    }
+                });
+
+                // alert("{'answerId' :  null, 'answerText' : " + document.getElementById(lomake[i]).value + ",  'question' : { 'questionId' : " + lomake[i] + " }}");
+
+            }
+            window.open('kiitos.html', '_self', false)
+        }
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

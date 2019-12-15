@@ -1,0 +1,147 @@
+<html>
+
+<head>
+
+    <link rel="stylesheet" type="text/css" href="Visualisointi3.css">
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        // Load Charts and the corechart package.
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+
+        // Draw the pie chart for Sarah's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawSarahChart);
+
+        // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+        google.charts.setOnLoadCallback(drawAnthonyChart);
+
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that draws the pie chart for Sarah's pizza.
+        function drawSarahChart() {
+
+            // Create the data table for Sarah's pizza.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Vastaukset');
+            data.addRows([
+                ['Kurssilla on käyty yritysvierailulla', 3],
+                ['Yrityksen edustaja on käynyt luennoimassa kurssin aiheesta', 3],
+                ['Kurssin toimeksiantajana on ollut yritys', 1],
+                ['Opettaja on kertonut esimerkkejä yrityksistä, joissa opeteltavat metodit ovat käytössä', 5],
+                ['Muu, mikä?', 2]
+            ]);
+
+            // Set options for Sarah's pie chart.
+            var options = {
+                title: 'Miten kurssien työelämäyhteys tuotu esille',
+                width: 1000,
+                height: 800
+            };
+
+            // Instantiate and draw the chart for Sarah's pizza.
+            var chart = new google.visualization.BarChart(document.getElementById('tyoelama'));
+            chart.draw(data, options);
+        }
+
+        // Callback that draws the pie chart for Anthony's pizza.
+        function drawAnthonyChart() {
+
+
+            // Create the data table for Anthony's pizza.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Vastaukset');
+            data.addRows([
+                ['Unhappy', 2],
+                ['Meh', 3],
+                ['Happy', 5],
+                ['Very happy', 4],
+            ]);
+
+            // Set options for Anthony's pie chart.
+            var options = {
+                title: 'Mikä näistä kuvaa parhaiten Haaga-Helian kurssitarjontaa',
+                width: 1000,
+                height: 800,
+
+
+            };
+
+            // Instantiate and draw the chart for Anthony's pizza.
+            var chart = new google.visualization.PieChart(document.getElementById('naamat'));
+            chart.draw(data, options);
+
+        }
+
+        function drawChart() {
+            var jsonData = $.ajax({
+                url: "http://www.mocky.io/v2/5ddfb3b43500007900480807",
+                dataType: "json",
+                async: false
+            }).responseText;
+            var options = {
+                title: 'Oletko suorittanut kursseja',
+                width: 1000,
+                height: 800,
+
+
+            };
+            // Create our data table out of JSON data loaded from server.
+            var data = new google.visualization.DataTable(jsonData);
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+    
+
+        var lomake = []; // kerää id tunnukset tänne
+        var items = []; //taulukko, johon kerätään lomake       
+
+        $.getJSON("https://questionnaireapp.herokuapp.com/allanswers", function(data) {
+
+
+            // jos kaarisulut items.push(data.title);
+
+            $.each(data, function(key, d) {
+                items.push(d.answerText);
+                items.push("<input type = text id=" + d.answerId + "><br>");
+                lomake.push(d.answerId);
+
+            });
+
+            // items.push("<br><input type = button value='Lähetä vastaukset' onclick=laheta()>")
+
+            //tulostus
+            $(".vastaukset").append(items.join("<br>"));
+
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <!--Table and divs that hold the pie charts-->
+    <h1>Visualisointi</h1>
+    <div class="lomake">
+
+        <div id="tyoelama" style="border: 1px solid #ccc"></div>
+
+        <div id="naamat" style="border: 1px solid #ccc"></div>
+
+        <div id="chart_div"></div>
+        <div id="vastaukset"></div>
+
+    </div>
+
+</body>
+
+</html>
